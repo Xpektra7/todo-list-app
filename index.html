@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="style.css">
+  
+  <title>Frontend Mentor | Todo app</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+</head>
+<body class="" id="body">
+
+    <header>
+      <h1>TODO</h1>
+      <button role="button" onclick="toggleTheme()">
+        <img src="images/icon-moon.svg" alt="icon-moon" id="icon-moon">
+        <img src="images/icon-sun.svg" alt="icon-sun" id="icon-sun">
+      </button>
+    </header>
+    <div id="form">
+      <input type="text" id="input" aria-autocomplete="none" placeholder="Create a new todo" submi>
+      <span id="ring"></span>
+    </div>
+    <main>
+      <ul role="table" id="tasks">
+        
+      </ul>
+      <div class="tools">
+        <p id="taskCount">4 tasks left</p>
+        <div class="filters" role="toolbar">
+          <input type="radio" name="filter" id="all" checked>
+          <label for="all" onclick="filter(this)">All</label>
+          <input type="radio" name="filter" id="pending">
+          <label for="pending" onclick="filter(this)">Active</label>
+          <input type="radio" name="filter" id="completed">
+          <label for="completed" onclick="filter(this)">Completed</label>
+        </div>
+        <a href="#" class="filter" id="clear" onclick="clearCompleted()">Clear Completed</a>
+      </div>
+    </main>
+    <nav>
+      <div class="filters" role="toolbar">
+        <input type="radio" name="mobile-filter" id="mobile-all">
+        <label for="mobile-all" onclick="filter(this)">All</label>
+        <input type="radio" name="mobile-filter" id="mobile-pending">
+        <label for="mobile-pending" onclick="filter(this)">Active</label>
+        <input type="radio" name="mobile-filter" id="mobile-completed">
+        <label for="mobile-completed" onclick="filter(this)">Completed</label>
+      </div>
+    </nav>
+
+  <!-- 
+    items left
+  All
+  Active 
+  Completed
+
+  Clear Completed
+
+  Drag and drop to reorder list
+ -->
+  <footer class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Xpektra</a>.
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
