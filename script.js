@@ -1,3 +1,4 @@
+let theme = localStorage.getItem("theme");
 const tasks = document.getElementsByName("todo");
 const todoList = document.getElementById("tasks");
 const body = document.getElementById("body");
@@ -5,7 +6,19 @@ const checkboxes = document.getElementsByName("checkbox");
 const taskboxes = document.getElementsByName("taskbox");
 const input = document.getElementById("input");
 let todos = JSON.parse(localStorage.getItem("todo-list"));
+let filterProp = localStorage.getItem("filter");
 
+if (!todos) {
+    todos = [];
+};
+
+if(!filterProp){
+    localStorage.setItem("filter","all");
+    console.log("prop");
+    
+}
+
+initializeTheme();
 
 tasks.forEach(element => {
     if(element.querySelector("input").checked){
@@ -22,24 +35,12 @@ function filter(selectedTask) {
 
 
 function showTodo(filter) {    
-    document.getElementById("taskCount").innerHTML = `${todos.length} tasks left`;
-    let theme = localStorage.getItem("theme");
+    document.getElementById("taskCount").innerHTML = `${todos.length} tasks left` || "0 tasks left";
     if (filter == undefined) {
         filter = localStorage.getItem("filter");
-        document.getElementById(filter).checked = true;
-        document.getElementById(`mobile-${filter}`).checked = true;
-
     }
-    if (theme === "light") {
-        body.classList.add("light");
-        body.classList.remove("dark");
-    } else if (theme === "dark") {
-        body.classList.remove("light");
-        body.classList.add("dark");
-    }else{
-        body.classList.remove("light");
-        body.classList.add("dark");
-    }
+    document.getElementById(filter).checked = true;
+    document.getElementById(`mobile-${filter}`).checked = true;
 
     let list = ""
     if (todos) {
@@ -63,7 +64,7 @@ function showTodo(filter) {
     
 };
 
-showTodo("all");
+showTodo();
 
 function updateStatus(selectedTask){
     let taskName = selectedTask.parentElement;
@@ -82,33 +83,40 @@ function updateStatus(selectedTask){
 input.addEventListener("keyup", e => {
     let userTask = input.value.trim();
     if (e.key == "Enter" && userTask) {
-
-        if (!todos) {
-            todos = [];
-        };
         input.value="";
-        let taskInfo = {name:userTask,status:"pending"};
-        todos.push(taskInfo);
-        localStorage.setItem("todo-list" , JSON.stringify(todos));
-        showTodo("all");
+        if(trimArray(todos,userTask)){
+            let taskInfo = {name:userTask,status:"pending"};
+            todos.push(taskInfo);
+        }
+    localStorage.setItem("todo-list" , JSON.stringify(todos));
+    showTodo();
     }
 });
 
 function toggleTheme() {
-    let theme = localStorage.getItem("theme");
-
     if (theme === "light") {
-        body.classList.toggle("light");
-        body.classList.toggle("dark");
-        theme = "dark"
+        theme = "dark";
     } else if (theme === "dark") {
-        body.classList.toggle("light");
-        body.classList.toggle("dark");
-        theme = "light"
+        theme = "light";
     }
 
-    localStorage.setItem("theme",theme);
+    initializeTheme();
 };
+
+function initializeTheme() {
+    if (theme === "light") {
+        body.classList.add("light");
+        body.classList.remove("dark");
+    } else if (theme === "dark") {
+        body.classList.remove("light");
+        body.classList.add("dark");
+    }
+    else{
+        body.classList.add("dark");
+        theme = "dark";
+    }
+    localStorage.setItem("theme",theme);
+}
 
 function alternateStatus(selectedTask){
     let taskName = selectedTask.parentElement;
@@ -131,16 +139,28 @@ function removeTodo(id) {
 }
 
 function clearCompleted() {
-    let demo = [];
-    todos.forEach(todo => {
-        if(todo.status != "completed"){
-           demo.push(todo);
-        }
-    })
-    todos = [];
-    todos = demo;
-    localStorage.setItem("todo-list" , JSON.stringify(todos));
-    showTodo()         
-
+    if (todos) {
+        let demo = [];
+        todos.forEach(todo => {
+            if(todo.status != "completed"){
+               demo.push(todo);
+            }
+        })
+        todos = [];
+        todos = demo;
+        localStorage.setItem("todo-list" , JSON.stringify(todos));
+        showTodo()             
+    }
 }
+function trimArray(array,task) {
+    let duplicate = [];
+    array.forEach(element => {
+        duplicate.push(element.name);
+    });
 
+    if (duplicate.includes(task)) {
+        return false
+    } else {
+        return true
+    }
+}
