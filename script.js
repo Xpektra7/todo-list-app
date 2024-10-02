@@ -63,7 +63,7 @@ function showTodo(filter) {
     
 };
 
-showTodo();
+showTodo("all");
 
 function updateStatus(selectedTask){
     let taskName = selectedTask.parentElement;
