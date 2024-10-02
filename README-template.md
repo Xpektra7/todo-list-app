@@ -39,7 +39,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Solution URL: [Add solution URL here](https://github.com/Xpektra7/todo-list-app)
 - Live Site URL: [Add live site URL here](https://todo-list-app-dun-three.vercel.app/)
 
 ## My process
