@@ -14,7 +14,6 @@ This is a solution to the [Todo app challenge on Frontend Mentor](https://www.fr
   - [Continued development](#continued-development)
 - [Author](#author)
 
-**Note: Delete this note and update the table of contents based on what sections you keep.**
 
 ## Overview
 
@@ -30,7 +29,6 @@ Users should be able to:
 - Filter by all/active/complete todos
 - Clear all completed todos
 - Toggle light and dark mode
-- **Bonus**: Drag and drop to reorder items on the list
 
 ### Screenshot
 
@@ -49,17 +47,16 @@ Users should be able to:
 - Semantic HTML5 markup
 - CSS custom properties
 - Flexbox
-- CSS Grid
 - Mobile-first workflow
 
 ### What I learned
-
 -Browser local storage
 ### Continued development
 -Browser local storage
 -Cookies and session storage
 -CSS custom properties
-
+-CSS Pseudo classes
+-HTML data attributes 
 ## Author
 
 - Website - [Xpektra](https://xpektra.vercel.app)

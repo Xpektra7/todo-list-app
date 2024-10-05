@@ -264,8 +264,6 @@ input[type="radio"]:checked + label{
     color: var(--Bright-Blue);
 }
 
-
-
 @media (max-width:480px) {
     .light{
         background-image: url(images/bg-mobile-light.jpg);

@@ -1,30 +1,12 @@
 let theme = localStorage.getItem("theme");
-const tasks = document.getElementsByName("todo");
+const tasks = document.querySelectorAll(".task");
 const todoList = document.getElementById("tasks");
 const body = document.getElementById("body");
-const checkboxes = document.getElementsByName("checkbox");
 const taskboxes = document.getElementsByName("taskbox");
 const input = document.getElementById("input");
 let todos = JSON.parse(localStorage.getItem("todo-list"));
 let filterProp = localStorage.getItem("filter");
 
-if (!todos) {
-    todos = [];
-};
-
-if(!filterProp){
-    localStorage.setItem("filter","all");
-    console.log("prop");
-    
-}
-
-initializeTheme();
-
-tasks.forEach(element => {
-    if(element.querySelector("input").checked){
-        element.classList.add("checked");
-    }
-});
 
 function filter(selectedTask) {
     let btnId = selectedTask.previousElementSibling.id;
@@ -32,7 +14,6 @@ function filter(selectedTask) {
     showTodo(btnId);
     localStorage.setItem("filter",btnId);
 }
-
 
 function showTodo(filter) {    
     document.getElementById("taskCount").innerHTML = `${todos.length} tasks left` || "0 tasks left";
@@ -48,8 +29,8 @@ function showTodo(filter) {
             let isCompleted = todo.status == "completed" ? "checked" : "";
             if (filter == todo.status || filter == "all") {
                 list +=  `
-                <li class="task" id="${id}" status="${todo.status}" name="todo">
-                    <button role="button" class="checkbox ${isCompleted}" name="checkbox" onclick="alternateStatus(this)"><img src="images/icon-check.svg" alt="icon-check"></button>
+                <li class="task" id="${id}" status="${todo.status}" name="todo" draggable="true">
+                    <label for="task${id}" class="checkbox ${isCompleted}" name="checkbox"><img src="images/icon-check.svg" alt="icon-check"></label>
                     <input type="checkbox" id="task${id}" name="taskbox" onclick="updateStatus(this)" ${isCompleted}>
                     <label for="task${id}">${todo.name}</label>
                     <button role="button" class="crossBtn" onclick="removeTodo(${id})">
@@ -64,8 +45,6 @@ function showTodo(filter) {
     
 };
 
-showTodo();
-
 function updateStatus(selectedTask){
     let taskName = selectedTask.parentElement;
     if (selectedTask.checked) {
@@ -79,19 +58,6 @@ function updateStatus(selectedTask){
     localStorage.setItem("todo-list" , JSON.stringify(todos));
     showTodo()
 }
-
-input.addEventListener("keyup", e => {
-    let userTask = input.value.trim();
-    if (e.key == "Enter" && userTask) {
-        input.value="";
-        if(trimArray(todos,userTask)){
-            let taskInfo = {name:userTask,status:"pending"};
-            todos.push(taskInfo);
-        }
-    localStorage.setItem("todo-list" , JSON.stringify(todos));
-    showTodo();
-    }
-});
 
 function toggleTheme() {
     if (theme === "light") {
@@ -118,20 +84,6 @@ function initializeTheme() {
     localStorage.setItem("theme",theme);
 }
 
-function alternateStatus(selectedTask){
-    let taskName = selectedTask.parentElement;
-    if (selectedTask.nextElementSibling.checked) {
-        taskName.classList.remove("checked");
-        todos[taskName.id].status="pending";
-    }else {
-        taskName.classList.add("checked");
-        todos[taskName.id].status="completed";
-    }
-
-    showTodo()
-    localStorage.setItem("todo-list" , JSON.stringify(todos));
-}
-
 function removeTodo(id) {
    todos.splice(id,1);
    localStorage.setItem("todo-list" , JSON.stringify(todos));
@@ -152,6 +104,7 @@ function clearCompleted() {
         showTodo()             
     }
 }
+
 function trimArray(array,task) {
     let duplicate = [];
     array.forEach(element => {
@@ -164,3 +117,34 @@ function trimArray(array,task) {
         return true
     }
 }
+
+if (!todos) {
+    todos = [];
+};
+
+if(!filterProp){
+    localStorage.setItem("filter","all");    
+}
+
+tasks.forEach(element => {
+    if(element.querySelector("input").checked){
+        element.classList.add("checked");
+    };
+});
+
+input.addEventListener("keyup", e => {
+    let userTask = input.value.trim();
+    if (e.key == "Enter" && userTask) {
+        input.value="";
+        if(trimArray(todos,userTask)){
+            let taskInfo = {name:userTask,status:"pending"};
+            todos.push(taskInfo);
+        }
+    localStorage.setItem("todo-list" , JSON.stringify(todos));
+    showTodo();
+    }
+});
+
+showTodo();
+initializeTheme();
+
