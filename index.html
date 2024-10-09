@@ -20,17 +20,17 @@
 
     <header>
       <h1>TODO</h1>
-      <button role="button" onclick="toggleTheme()">
+      <button onclick="toggleTheme()">
         <img src="images/icon-moon.svg" alt="icon-moon" id="icon-moon">
         <img src="images/icon-sun.svg" alt="icon-sun" id="icon-sun">
       </button>
     </header>
-    <div id="form">
+    <section id="form">
       <input type="text" aria-label="input" id="input" placeholder="Create a new todo">
       <span id="ring"></span>
-    </div>
+    </section>
     <main>
-      <ul role="table" id="tasks" aria-roledescription="tasks">
+      <ul role="feed" id="tasks" aria-roledescription="tasks">
         
       </ul>
       <div class="tools">

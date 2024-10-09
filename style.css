@@ -137,7 +137,8 @@ main{
         border-radius: 5px;
     }
 }
-#tasks h2{
+#tasks p{
+    font-size: 1.5rem;
     color: var(--Dark-Grayish-Blue);
     align-self: center;
     margin-block: auto;

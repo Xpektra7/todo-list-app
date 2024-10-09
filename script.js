@@ -41,7 +41,7 @@ function showTodo(filter) {
             }
         });
     }
-    todoList.innerHTML = list ||  `<h2 aria-roledescription="default_text">You don't have any task here</h2>`;
+    todoList.innerHTML = list ||  `<p aria-roledescription="default_text">You don't have any task here</p>`;
     
 };
 
