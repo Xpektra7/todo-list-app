@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-
+  <meta name="description" content="Todo-list-app">
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
@@ -26,11 +26,11 @@
       </button>
     </header>
     <div id="form">
-      <input type="text" id="input" aria-autocomplete="none" placeholder="Create a new todo" submi>
+      <input type="text" aria-label="input" id="input" placeholder="Create a new todo">
       <span id="ring"></span>
     </div>
     <main>
-      <ul role="table" id="tasks">
+      <ul role="table" id="tasks" aria-roledescription="tasks">
         
       </ul>
       <div class="tools">
@@ -57,16 +57,6 @@
       </div>
     </nav>
 
-  <!-- 
-    items left
-  All
-  Active 
-  Completed
-
-  Clear Completed
-
-  Drag and drop to reorder list
- -->
   <footer class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
     Coded by <a href="#">Xpektra</a>.
@@ -74,3 +64,4 @@
  
 </body>
 </html>
+~
